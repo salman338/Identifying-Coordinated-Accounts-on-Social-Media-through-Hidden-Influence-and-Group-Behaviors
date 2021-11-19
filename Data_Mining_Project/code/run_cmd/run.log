@@ -1,0 +1,704 @@
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=1, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:132} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:132} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:132} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:147} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:168} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:193} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:527} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=1, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:132} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:132} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:132} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:147} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:168} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:193} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:527} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=1, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:527} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=64, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:527} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:522} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Arguments = Namespace(add=0, batch_size=64, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:525} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:527} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:524} INFO - Arguments = Namespace(add=0, batch_size=64, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:526} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:524} INFO - Arguments = Namespace(add=0, batch_size=64, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:526} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:524} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=32, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:526} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:528} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:524} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=64, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:526} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:528} INFO - model created from config hyperparameters.
+[{amdn_Gaussian-tied-unco-new.py:523} INFO - Logging any runs of this program - appended to same file.
+[{amdn_Gaussian-tied-unco-new.py:524} INFO - Arguments = Namespace(add=0, batch_size=128, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, gmm_k=2, gpu0sz=32, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_loop=5, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, val_batch_size=1, wide=True)
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split train...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split dev...
+[{amdn_Gaussian-tied-unco-new.py:131} INFO - loaded split test...
+[{amdn_Gaussian-tied-unco-new.py:146} INFO - Mean and std in train = -5.332004547119141 and 2.4432380199432373
+[{amdn_Gaussian-tied-unco-new.py:167} INFO - Mean and std out train = -5.369558334350586 and 2.449768543243408
+[{amdn_Gaussian-tied-unco-new.py:526} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_Gaussian-tied-unco-new.py:192} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_Gaussian-tied-unco-new.py:528} INFO - model created from config hyperparameters.
+[{amdn_trial.py:383} INFO - Logging any runs of this program - appended to same file.
+[{amdn_trial.py:384} INFO - Arguments = Namespace(add=0, batch_size=32, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, wide=True)
+[{amdn_trial.py:37} INFO - Mean and std in train = -5.928224086761475 and 1.9866676330566406
+[{amdn_trial.py:58} INFO - Mean and std out train = -6.058536052703857 and 1.7778918743133545
+[{amdn_trial.py:386} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_trial.py:147} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_trial.py:388} INFO - model created from config hyperparameters.
+[{amdn_trial.py:231} INFO - Epoch    1, trlast = 6.1612, val = 8.0393
+[{amdn_trial.py:231} INFO - Epoch    2, trlast = 6.1543, val = 7.6559
+[{amdn_trial.py:231} INFO - Epoch    3, trlast = 7.1488, val = 8.0920
+[{amdn_trial.py:231} INFO - Epoch    4, trlast = 7.2555, val = 8.6329
+[{amdn_trial.py:231} INFO - Epoch    5, trlast = 7.9632, val = 8.8312
+[{amdn_trial.py:231} INFO - Epoch    6, trlast = 7.0102, val = 8.1072
+[{amdn_trial.py:231} INFO - Epoch    7, trlast = 6.9470, val = 8.0957
+[{amdn_trial.py:231} INFO - Epoch    8, trlast = 6.9340, val = 8.1219
+[{amdn_trial.py:231} INFO - Epoch    9, trlast = 6.5573, val = 7.9125
+[{amdn_trial.py:231} INFO - Epoch   10, trlast = 7.6913, val = 9.0784
+[{amdn_trial.py:235} INFO - saved intermediate checkpoint
+[{amdn_trial.py:231} INFO - Epoch   11, trlast = 6.8719, val = 8.1227
+[{amdn_trial.py:228} INFO - Breaking due to early stopping at epoch 11
+[{amdn_trial.py:237} INFO - Training finished.............
+[{amdn_trial.py:241} INFO - The entire model is saved in ./best_full_model.pt.
+[{amdn_trial.py:398} INFO - Train: 5.8008
+[{amdn_trial.py:399} INFO - TimeNLL:-4.9416 MarksNLL:10.7424 Acc:0.0009
+[{amdn_trial.py:398} INFO - Val: 7.6559
+[{amdn_trial.py:399} INFO - TimeNLL:-3.1685 MarksNLL:10.8244 Acc:0.0010
+[{amdn_trial.py:398} INFO - Test: 8.6045
+[{amdn_trial.py:399} INFO - TimeNLL:-2.2676 MarksNLL:10.8721 Acc:0.0009
+[{amdn_trial.py:383} INFO - Logging any runs of this program - appended to same file.
+[{amdn_trial.py:384} INFO - Arguments = Namespace(add=0, batch_size=32, data_dir='../../kdd_data/', data_prefix='eachseq_data_minlen2', decoder_name='LogNormMix', depth=1, device='cuda', display_step=1, embedding_size=None, encoder_type='ATTN', expand_dim=10, heads=1, history_size=32, hypernet_hidden_sizes=[], layer_size=None, learning_rate=0.001, log_filename='run.log', mark_embedding_size=64, max_degree=None, max_epochs=1000, max_seq_length=128, n_components=8, n_layers=None, n_terms=None, out_dir='./', patience=10, pos_enc=False, regularization=1e-05, rnn_type='GRU', save_freq=10, seed=1, time_opt='delta', trainable_affine=True, use_embedding=False, use_history=True, use_marks=True, wide=True)
+[{amdn_trial.py:37} INFO - Mean and std in train = -5.928224086761475 and 1.9866676330566406
+[{amdn_trial.py:58} INFO - Mean and std out train = -6.058536052703857 and 1.7778918743133545
+[{amdn_trial.py:386} INFO - loaded the dataset and formed torch dataloaders.
+[{amdn_trial.py:147} INFO - Model(
+  (rnn): AttentiveLayer(
+    (mark_embedding): Embedding(119298, 64)
+    (tblocks): Sequential(
+      (0): TransformerBlock(
+        (attention): SelfAttentionWide(
+          (tokeys): Linear(in_features=192, out_features=192, bias=False)
+          (toqueries): Linear(in_features=192, out_features=192, bias=False)
+          (tovalues): Linear(in_features=192, out_features=192, bias=False)
+          (unifyheads): Linear(in_features=192, out_features=192, bias=True)
+        )
+        (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (ff): Sequential(
+          (0): Linear(in_features=192, out_features=384, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=384, out_features=192, bias=True)
+        )
+        (do): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (mark_layer): Sequential(
+    (0): Linear(in_features=192, out_features=192, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=192, out_features=119298, bias=True)
+  )
+  (decoder): TransformedDistribution(
+    (transforms): ModuleList(
+      (0): FixedAffine()
+      (1): Exp()
+    )
+    (base_dist): NormalMixtureDistribution(
+      (hypernet): Hypernet(
+        (activation): Tanh()
+        (linear_rnn): Linear(in_features=192, out_features=24, bias=False)
+        (linear_layers): ModuleList()
+      )
+    )
+  )
+)
+[{amdn_trial.py:388} INFO - model created from config hyperparameters.
+[{amdn_trial.py:231} INFO - Epoch    1, trlast = 6.1612, val = 8.0393
+[{amdn_trial.py:231} INFO - Epoch    2, trlast = 6.1543, val = 7.6559
+[{amdn_trial.py:231} INFO - Epoch    3, trlast = 7.1488, val = 8.0920
+[{amdn_trial.py:231} INFO - Epoch    4, trlast = 7.2555, val = 8.6329
+[{amdn_trial.py:231} INFO - Epoch    5, trlast = 7.9632, val = 8.8312
+[{amdn_trial.py:231} INFO - Epoch    6, trlast = 7.0102, val = 8.1072
+[{amdn_trial.py:231} INFO - Epoch    7, trlast = 6.9470, val = 8.0957
+[{amdn_trial.py:231} INFO - Epoch    8, trlast = 6.9340, val = 8.1219
+[{amdn_trial.py:231} INFO - Epoch    9, trlast = 6.5573, val = 7.9125
+[{amdn_trial.py:231} INFO - Epoch   10, trlast = 7.6913, val = 9.0784
+[{amdn_trial.py:235} INFO - saved intermediate checkpoint
+[{amdn_trial.py:231} INFO - Epoch   11, trlast = 6.8719, val = 8.1227
+[{amdn_trial.py:228} INFO - Breaking due to early stopping at epoch 11
+[{amdn_trial.py:237} INFO - Training finished.............
+[{amdn_trial.py:241} INFO - The entire model is saved in ./best_full_model.pt.
+[{amdn_trial.py:398} INFO - Train: 5.8008
+[{amdn_trial.py:399} INFO - TimeNLL:-4.9416 MarksNLL:10.7424 Acc:0.0009
+[{amdn_trial.py:398} INFO - Val: 7.6559
+[{amdn_trial.py:399} INFO - TimeNLL:-3.1685 MarksNLL:10.8244 Acc:0.0010
+[{amdn_trial.py:398} INFO - Test: 8.6045
+[{amdn_trial.py:399} INFO - TimeNLL:-2.2676 MarksNLL:10.8721 Acc:0.0009
+[{amdn_trial.py:264} INFO - Mark embedding features = (119298, 64)
+[{amdn_trial.py:266} INFO - Saved mark embedding features (z).
+[{amdn_trial.py:269} INFO - sent to output directory: (none: I.npy)
+[{amdn_trial.py:270} INFO - Either model type is RNN or user/marks is large, skipping I.npy
+[{amdn_trial.py:406} INFO - Finished program.
